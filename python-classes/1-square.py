@@ -1,4 +1,7 @@
 #!/usr/bin/python3
 class Square:
-    def __init__(self, size=0):
-        self._Square__size = size
+    """
+    creates a square class object
+    """
+    def __init__(self, size):
+        self.__size = size
