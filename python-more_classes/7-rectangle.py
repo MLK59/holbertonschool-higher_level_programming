@@ -75,14 +75,14 @@ class Rectangle:
         """
         if not self.perimeter:
             return ""
-        return('\n'.join("{}".format(
+        return ('\n'.join("{}".format(
             self.print_symbol) * self.width for x in range(self.height)))
 
     def __repr__(self):
         """modifies repr object
 
         """
-        return("Rectangle({}, {})".format(self.width, self.height))
+        return ("Rectangle({}, {})".format(self.width, self.height))
 
     def __del__(self):
         """modifies del object
