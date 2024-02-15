@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 
-Rectangle = __import__('9-rectangle').Rectangle
+""" Rectangle class """
+
+
+Rectangle = __import__("9-rectangle").Rectangle
 
 """
 Square class with size
@@ -11,6 +14,7 @@ class Square(Rectangle):
     """
     class Square that inherits from rectangle
     """
+
     def __init__(self, size):
         """
         instantiates square
