@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 
+""" Rectangle class """
+
+
 BaseGeometry = __import__("7-base_geometry").BaseGeometry
 
 """
@@ -17,13 +20,10 @@ class Rectangle(BaseGeometry):
     """
 
     def __init__(self, width, height):
-        """
-        Initialize a new Rectangle instance.
-        Parameters:
-        width (int): The width of the rectangle.
-        height (int): The height of the rectangle.
-        The constructor uses the integer_validator method from the BaseGeometry
-        superclass to validate that both the width and height are positive integers.
+        """Initialize a new Rectangle instance.
+        Args:
+            width (int): The width of the rectangle.
+            height (int): The height of the rectangle.
         """
         self.__width = width
         self.__height = height
