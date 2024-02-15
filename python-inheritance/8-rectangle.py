@@ -8,7 +8,7 @@ Rectangle class with width and height
 
 
 class Rectangle(BaseGeometry):
- 
+
     def __init__(self, width, height):
         """
         instantiation with width and height
