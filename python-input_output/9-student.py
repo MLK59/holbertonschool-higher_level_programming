@@ -1,10 +1,22 @@
 #!/usr/bin/python3
-
-"""class_to_json
+"""
+Module for task 9
 """
 
 
-def class_to_json(obj):
-    """Returns the dictionary description for JSON"""
+class Student:
+    def __init__(self, first_name, last_name, age):
+        """Initialize a new Student.
 
-    return obj.__dict__
+        Args:
+            first_name (str): The first name of the student.
+            last_name (str): The last name of the student.
+            age (int): The age of the student.
+        """
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
+
+    def to_json(self):
+        """Get a dictionary representation of the Student."""
+        return self.__dict__

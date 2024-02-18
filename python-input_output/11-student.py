@@ -1,10 +1,17 @@
 #!/usr/bin/python3
-"""Student
+"""
+    This module contains a class Student
 """
 
 
 class Student:
-    """Contains student data"""
+    """Initialization of attributes
+
+    Args:
+        first_name(str): first attribute
+        last_name(str): second attribute
+        age(int): third attribute
+    """
 
     def __init__(self, first_name, last_name, age):
         self.first_name = first_name
@@ -12,15 +19,16 @@ class Student:
         self.age = age
 
     def to_json(self, attrs=None):
-        """Retrieves dictionary of Student with conditions to filter"""
+        """
+        Return a dictionary
+        """
 
-        if attrs == None or type(attrs) != list:
-            return self.__dict__
-        else:
-            temp = {}
-            for elem in attrs:
-                if type(elem) != str:
-                    return self.__dict__
-                if elem in self.__dict__.keys():
-                    temp[elem] = self.__dict__[elem]
-            return temp
+        if isinstance(attrs, list) and all(isinstance(attr, str) for attr in attrs):
+            return {attr: getattr(self, attr) for attr in attrs if hasattr(self, attr)}
+
+        return self.__dict__
+
+    def reload_from_json(self, json):
+        """Replaces attributes of instance"""
+        for key, value in json.items():
+            setattr(self, key, value)
