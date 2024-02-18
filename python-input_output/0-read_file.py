@@ -1,12 +1,9 @@
 #!/usr/bin/python3
-
-"""Read file"""
+"""reads a file"""
 
 
 def read_file(filename=""):
-    """Read
-    Args:
-        filename: name of the file
-    """
-    with open(filename, encoding="utf-8") as file:
-        print(file.read(), end="")
+    """reads a file"""
+    with open(filename, mode="r", encoding="utf-8") as f:
+        for line in f:
+            print(line, end="")
