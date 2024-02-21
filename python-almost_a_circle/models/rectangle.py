@@ -1,69 +1,112 @@
 #!/usr/bin/python3
+""" rectangle class"""
+from models.base import Base
 
-# Import the Base class from the base module within the models package
-from .base import Base
 
+class Rectangle(Base):
+    """makes a new rectangle"""
 
-class Rectangle(Base):  # Rectangle inherits from Base
     def __init__(self, width, height, x=0, y=0, id=None):
-        """
-        Initialize a new Rectangle instance.
-
-        Args:
-            width (int): The width of the rectangle.
-            height (int): The height of the rectangle.
-            x (int, optional): The x coordinate of the rectangle. Defaults to 0.
-            y (int, optional): The y coordinate of the rectangle. Defaults to 0.
-            id (int, optional): An identifier for the rectangle. Defaults to None, which triggers automatic id assignment.
-        """
-        # Call the constructor of the Base class, enabling automatic id assignment or using the provided id
+        """initializes"""
+        self.__width = width
+        self.__height = height
+        self.__x = x
+        self.__y = y
         super().__init__(id)
-        # Set instance attributes with the provided values, using setters for validation
-        self.width = width
-        self.height = height
-        self.x = x
-        self.y = y
 
-    # Getter for the width attribute
+    def to_dictionary(self):
+        """dictionary"""
+        dic = {
+            "id": self.id,
+            "width": self.width,
+            "height": self.height,
+            "x": self.x,
+            "y": self.y,
+        }
+        return dic
+
+    def update(self, *args, **kwargs):
+        """updates attributes"""
+        if args:
+            i = 0
+            keys = ["id", "width", "height", "x", "y"]
+            for arg in args:
+                setattr(self, keys[i], arg)
+                i += 1
+        elif kwargs:
+            for key, value in kwargs.items():
+                if hasattr(self, key):
+                    setattr(self, key, value)
+
+    def validator(self, name, value):
+        """validates the shit out of it"""
+        if not isinstance(value, int):
+            raise TypeError("{} must be an integer".format(name))
+        if (name is "width" or name is "height") and value <= 0:
+            raise ValueError("{} must be > 0".format(name))
+        if (name is "x" or name is "y") and value < 0:
+            raise ValueError("{} must be >= 0".format(name))
+
     @property
     def width(self):
+        """get width"""
         return self.__width
 
-    # Setter for the width attribute, includes a placeholder for validation logic
-    @width.setter
-    def width(self, value):
-        # Validation logic could go here (e.g., check if value is an int and greater than 0)
-        self.__width = value
-
-    # Getter for the height attribute
     @property
     def height(self):
+        """get height"""
         return self.__height
 
-    # Setter for the height attribute, includes a placeholder for validation logic
-    @height.setter
-    def height(self, value):
-        # Validation logic could go here
-        self.__height = value
-
-    # Getter for the x attribute
     @property
     def x(self):
+        """get x"""
         return self.__x
 
-    # Setter for the x attribute, includes a placeholder for validation logic
-    @x.setter
-    def x(self, value):
-        # Validation logic could go here
-        self.__x = value
-
-    # Getter for the y attribute
     @property
     def y(self):
+        """get y"""
         return self.__y
 
-    # Setter for the y attribute, includes a placeholder for validation logic
+    @width.setter
+    def width(self, value):
+        """sets width"""
+        self.validator("width", value)
+        self.__width = value
+
+    @height.setter
+    def height(self, value):
+        """sets height"""
+        self.validator("height", value)
+        self.__height = value
+
+    @x.setter
+    def x(self, value):
+        self.validator("x", value)
+        """sets x"""
+        self.__x = value
+
     @y.setter
     def y(self, value):
-        # Validation logic could go here
+        """sets y"""
+        self.validator("y", value)
         self.__y = value
+
+    def area(self):
+        """gets area"""
+        return self.width * self.height
+
+    def display(self):
+        """prints a rectangle of hashes"""
+        print("\n" * self.y, end="")
+        print(
+            "".join(
+                " " * self.x + "#" * self.width + "\n" for times in range(self.height)
+            ),
+            end="",
+        )
+
+    def __str__(self):
+        """gets rectangle"""
+        return "[{}] ({}) {}/{} - {}/{}".format(
+            type(self).__name__, self.id, self.x, self.y, self.width, self.height
+        )
